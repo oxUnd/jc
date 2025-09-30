@@ -1,0 +1,4 @@
+bin_PROGRAMS = PROJECT_NAME
+
+PROJECT_NAME_SOURCES = main.c
+PROJECT_NAME_CFLAGS = -Wall -Wextra -std=c11 -g

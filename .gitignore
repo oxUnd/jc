@@ -1,0 +1,39 @@
+# Automake/Autoconf
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache/
+compile
+config.h
+config.h.in
+config.log
+config.status
+configure
+depcomp
+install-sh
+missing
+stamp-h1
+.deps/
+.dirstamp
+m4/
+
+# Build artifacts
+*.o
+*.a
+*.so
+*.dylib
+src/jc
+
+# Test artifacts
+tests/test_jc
+
+# Debug
+*.dSYM/
+core
+vgcore.*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~
