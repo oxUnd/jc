@@ -349,7 +349,8 @@ static int update_makefile_am(const char *file_path) {
             line_end = line_start + strlen(line_start);
         }
 
-        if (strstr(line_start, "_SOURCES") != NULL && !sources_updated) {
+        // Look for the specific SOURCES line (e.g., "test_project_SOURCES = main.c")
+        if (strstr(line_start, "_SOURCES =") != NULL && !sources_updated) {
             // Copy the line up to the end
             size_t len = line_end - line_start;
             memcpy(output, line_start, len);
@@ -413,13 +414,9 @@ int cmd_add(int argc, char *argv[]) {
         // Add a single file
         char dst_path[PATH_MAX];
         
-        // If target is an absolute path or contains '/', use as is
-        if (target[0] == '/' || strchr(target, '/') != NULL) {
-            snprintf(dst_path, sizeof(dst_path), "%s", target);
-        } else {
-            // Otherwise, put it in src/ directory
-            snprintf(dst_path, sizeof(dst_path), "src/%s", target);
-        }
+        // Always put files in src/ directory, extract filename from source path
+        char *filename = basename((char*)target);
+        snprintf(dst_path, sizeof(dst_path), "src/%s", filename);
 
         return add_file(target, dst_path);
 

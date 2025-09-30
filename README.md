@@ -115,7 +115,7 @@ myproject/
 This project uses:
 - **Language**: C11
 - **Build System**: automake/autoconf
-- **Testing**: Google Test (gtest)
+- **Testing**: Check (libcheck)
 
 To build with tests:
 ```bash

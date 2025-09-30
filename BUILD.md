@@ -10,24 +10,23 @@ Before building, ensure you have the following tools installed:
 - **automake** (>= 1.15)
 - **make**
 - **gcc** or **clang** (C11 support)
-- **g++** or **clang++** (C++11 support, for tests)
-- **Google Test** (optional, for running tests)
+- **Check** (libcheck, optional, for running tests)
 
 ### Installing Prerequisites
 
 #### macOS (using Homebrew)
 ```bash
-brew install autoconf automake googletest
+brew install autoconf automake check
 ```
 
 #### Ubuntu/Debian
 ```bash
-sudo apt-get install autoconf automake build-essential libgtest-dev
+sudo apt-get install autoconf automake build-essential check
 ```
 
 #### Fedora/RHEL/CentOS
 ```bash
-sudo dnf install autoconf automake gcc gcc-c++ gtest-devel
+sudo dnf install autoconf automake gcc check-devel
 ```
 
 ## Quick Build
@@ -138,9 +137,9 @@ make distclean
 - Check compiler error messages
 
 ### Tests fail to build
-- Google Test must be installed
+- Check framework (libcheck) must be installed
 - Make sure you ran `./configure --enable-tests`
-- On some systems, you may need to build and install gtest manually
+- Install Check using your package manager (see Prerequisites section)
 
 ### Installation permission denied
 - Use `sudo make install`

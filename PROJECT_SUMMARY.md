@@ -81,7 +81,7 @@ jc run
 - ✅ 自动检测依赖和工具
 
 ### 测试框架 / Testing Framework
-- ✅ **Google Test (gtest)** - 单元测试支持
+- ✅ **Check (libcheck)** - 单元测试框架支持
 - ✅ 实现了工具函数的测试用例
 - ✅ 可通过 `--enable-tests` 启用
 
@@ -105,8 +105,7 @@ jc/
 │   ├── cmd_bt.c           # bt 命令实现
 │   └── templates/         # 项目模板文件
 ├── tests/                 # 单元测试
-│   ├── test_main.cpp      # 测试入口
-│   └── test_utils.cpp     # 工具函数测试
+│   └── test_utils.c       # 工具函数测试 (使用 Check 框架)
 ├── configure.ac           # Autoconf 配置
 ├── Makefile.am            # Automake 配置
 ├── autogen.sh             # 构建脚本
@@ -206,7 +205,7 @@ jc/
 - [x] 使用 C 语言开发（C11 标准）
 - [x] 使用最常用的工具库（标准 POSIX API）
 - [x] 使用 automake 管理项目本身
-- [x] 单测使用 gtest
+- [x] 单测使用 Check 框架
 
 ## 特色功能 / Notable Features
 

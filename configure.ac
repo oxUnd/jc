@@ -6,7 +6,6 @@ AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs
 AC_PROG_CC
-AC_PROG_CXX
 AM_PROG_AR
 AC_PROG_RANLIB
 
@@ -35,15 +34,15 @@ elif test "$GDB" != "no"; then
     AC_SUBST([DEBUGGER], [gdb])
 fi
 
-# Checks for libraries
-PKG_CHECK_MODULES([CHECK], [check >= 0.9.4], [have_check=yes], [have_check=no])
-AM_CONDITIONAL([HAVE_CHECK], [test "x$have_check" = "xyes"])
-
-# Check for Google Test (optional for testing)
+# Check for Check testing framework (optional for testing)
 AC_ARG_ENABLE([tests],
-    AS_HELP_STRING([--enable-tests], [Enable building tests]),
+    AS_HELP_STRING([--enable-tests], [Enable building tests with Check framework]),
     [enable_tests=$enableval],
     [enable_tests=no])
+
+if test "x$enable_tests" = "xyes"; then
+    PKG_CHECK_MODULES([CHECK], [check >= 0.9.4])
+fi
 
 AM_CONDITIONAL([ENABLE_TESTS], [test "x$enable_tests" = "xyes"])
 

@@ -16,6 +16,7 @@ int cmd_install(int argc, char *argv[]);
 int cmd_bt(int argc, char *argv[]);
 int cmd_clean(int argc, char *argv[]);
 int cmd_add(int argc, char *argv[]);
+int cmd_test(int argc, char *argv[]);
 
 // Version info
 #define JC_VERSION "1.0.0"

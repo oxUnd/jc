@@ -23,9 +23,8 @@ jc/
 │       ├── main.c.template
 │       ├── README.md.template
 │       └── autogen.sh.template
-├── tests/            # Unit tests (Google Test)
-│   ├── test_main.cpp
-│   └── test_utils.cpp
+├── tests/            # Unit tests (Check framework)
+│   └── test_utils.c
 ├── configure.ac      # Autoconf configuration
 ├── Makefile.am       # Top-level automake file
 └── autogen.sh        # Script to generate configure
@@ -188,16 +187,15 @@ Key features:
 
 **Tests directory** (`tests/Makefile.am`):
 - Only active if `--enable-tests` is used
-- Links with Google Test
-- Defines test programs
+- Links with Check framework (libcheck)
+- Defines test programs using START_TEST/END_TEST macros
 
 ## Testing
 
-**Framework**: Google Test (gtest)
+**Framework**: Check (libcheck)
 
 **Test Files**:
-- `test_main.cpp` - Test environment setup
-- `test_utils.cpp` - Tests for utility functions
+- `test_utils.c` - Tests for utility functions with setup/teardown fixtures
 
 **Test Coverage**:
 - Directory creation
@@ -260,6 +258,6 @@ When adding new features:
 1. Add command implementation in `src/cmd_<name>.c`
 2. Declare function in `src/jc.h`
 3. Add dispatcher case in `src/main.c`
-4. Add tests in `tests/test_<name>.cpp`
+4. Add tests in `tests/test_<name>.c`
 5. Update documentation (README.md, QUICKSTART.md)
 6. Test on multiple platforms if possible

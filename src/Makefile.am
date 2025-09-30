@@ -9,6 +9,7 @@ jc_SOURCES = \
     cmd_install.c \
     cmd_clean.c \
     cmd_bt.c \
+    cmd_test.c \
     utils.c \
     jc.h \
     utils.h

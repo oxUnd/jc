@@ -1,16 +1,14 @@
 if ENABLE_TESTS
 
-# Google Test based tests
+# Check framework based tests
 check_PROGRAMS = test_jc
 
 test_jc_SOURCES = \
-    test_main.cpp \
-    test_utils.cpp \
+    test_utils.c \
     ../src/utils.c
 
-test_jc_CPPFLAGS = -I$(top_srcdir)/src -std=c++11
-test_jc_CXXFLAGS = -Wall -Wextra -g
-test_jc_LDFLAGS = -lgtest -lgtest_main -pthread
+test_jc_CFLAGS = -I$(top_srcdir)/src $(CHECK_CFLAGS) -Wall -Wextra -g
+test_jc_LDADD = $(CHECK_LIBS)
 
 TESTS = test_jc
 

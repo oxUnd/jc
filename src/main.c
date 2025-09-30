@@ -12,6 +12,7 @@ void print_usage(const char *program_name) {
     printf("  run             Run the current project\n");
     printf("  install         Install the current project\n");
     printf("  clean           Clean build artifacts\n");
+    printf("  test            Manage and run tests\n");
     printf("  bt              Show backtrace (debug crashed program)\n");
     printf("  help            Show this help message\n");
     printf("  version         Show version information\n");
@@ -42,6 +43,8 @@ int main(int argc, char *argv[]) {
         return cmd_install(argc - 1, argv + 1);
     } else if (strcmp(command, "clean") == 0) {
         return cmd_clean(argc - 1, argv + 1);
+    } else if (strcmp(command, "test") == 0) {
+        return cmd_test(argc - 1, argv + 1);
     } else if (strcmp(command, "bt") == 0) {
         return cmd_bt(argc - 1, argv + 1);
     } else if (strcmp(command, "help") == 0 || strcmp(command, "--help") == 0 || strcmp(command, "-h") == 0) {
