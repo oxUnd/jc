@@ -26,6 +26,7 @@ src/jc
 
 # Test artifacts
 tests/test_jc
+test_*/
 
 # Debug
 *.dSYM/
