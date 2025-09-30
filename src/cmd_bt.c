@@ -64,7 +64,7 @@ int cmd_bt(int argc, char *argv[]) {
 
     // Find the executable
     char executable[PATH_MAX];
-    const char *search_dirs[] = {"src", ".", NULL};
+    const char *search_dirs[] = {"src/build", "src", ".", NULL};
     
     int found = 0;
     for (int i = 0; search_dirs[i] != NULL; i++) {

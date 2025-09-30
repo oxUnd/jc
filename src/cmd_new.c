@@ -36,19 +36,51 @@ static const char *makefile_am_template =
 "EXTRA_DIST = README.md\n";
 
 static const char *src_makefile_am_template =
+"# Programs to build\n"
 "bin_PROGRAMS = %s\n"
 "\n"
+"# Source files\n"
 "%s_SOURCES = main.c\n"
-"%s_CFLAGS = -Wall -Wextra -std=c11 -g\n";
+"\n"
+"# Compiler flags\n"
+"%s_CFLAGS = -Wall -Wextra -std=c11 -g -I$(srcdir)/include\n"
+"\n"
+"# Custom build rule to put executable in build directory\n"
+"all-local:\n"
+"\t@mkdir -p build\n"
+"\t@if [ -f %s$(EXEEXT) ]; then mv %s$(EXEEXT) build/; fi\n"
+"\n"
+"clean-local:\n"
+"\t@rm -rf build\n";
 
 static const char *main_c_template =
 "#include <stdio.h>\n"
 "#include <stdlib.h>\n"
+"#include \"project.h\"\n"
+"\n"
+"void print_version(void) {\n"
+"    printf(\"Version: %%s\\n\", PROJECT_VERSION);\n"
+"}\n"
 "\n"
 "int main(int argc, char *argv[]) {\n"
 "    printf(\"Hello from %s!\\n\");\n"
+"    print_version();\n"
 "    return 0;\n"
 "}\n";
+
+static const char *project_h_template =
+"#ifndef PROJECT_H\n"
+"#define PROJECT_H\n"
+"\n"
+"#include <stdio.h>\n"
+"\n"
+"/* Project version */\n"
+"#define PROJECT_VERSION \"1.0.0\"\n"
+"\n"
+"/* Function declarations */\n"
+"void print_version(void);\n"
+"\n"
+"#endif /* PROJECT_H */\n";
 
 static const char *readme_template =
 "# %s\n"
@@ -97,6 +129,7 @@ static const char *gitignore_template =
 ".dirstamp\n"
 "\n"
 "# Build artifacts\n"
+"build/\n"
 "*.o\n"
 "*.a\n"
 "*.so\n"
@@ -157,6 +190,14 @@ int cmd_new(int argc, char *argv[]) {
         return 1;
     }
 
+    // Create src/include directory
+    char include_dir[1024];
+    snprintf(include_dir, sizeof(include_dir), "%s/src/include", project_name);
+    if (create_directory(include_dir) != 0) {
+        fprintf(stderr, "Error: Failed to create src/include directory\n");
+        return 1;
+    }
+
     // Create m4 directory for autoconf macros
     char m4_dir[1024];
     snprintf(m4_dir, sizeof(m4_dir), "%s/m4", project_name);
@@ -185,7 +226,7 @@ int cmd_new(int argc, char *argv[]) {
     char src_makefile_am_content[4096];
     snprintf(src_makefile_am_path, sizeof(src_makefile_am_path), "%s/src/Makefile.am", project_name);
     snprintf(src_makefile_am_content, sizeof(src_makefile_am_content), 
-             src_makefile_am_template, am_var_name, am_var_name, am_var_name);
+             src_makefile_am_template, am_var_name, am_var_name, am_var_name, am_var_name, am_var_name);
     if (write_file(src_makefile_am_path, src_makefile_am_content) != 0) {
         fprintf(stderr, "Error: Failed to create src/Makefile.am\n");
         return 1;
@@ -198,6 +239,14 @@ int cmd_new(int argc, char *argv[]) {
     snprintf(main_c_content, sizeof(main_c_content), main_c_template, project_name);
     if (write_file(main_c_path, main_c_content) != 0) {
         fprintf(stderr, "Error: Failed to create src/main.c\n");
+        return 1;
+    }
+
+    // Write src/include/project.h
+    char project_h_path[1024];
+    snprintf(project_h_path, sizeof(project_h_path), "%s/src/include/project.h", project_name);
+    if (write_file(project_h_path, project_h_template) != 0) {
+        fprintf(stderr, "Error: Failed to create src/include/project.h\n");
         return 1;
     }
 

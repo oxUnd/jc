@@ -25,6 +25,7 @@ int cmd_run(int argc, char *argv[]) {
     
     // Try to find executable in common locations
     const char *search_dirs[] = {
+        "src/build",
         "src",
         ".",
         NULL
