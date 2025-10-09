@@ -6,6 +6,18 @@ AC_CONFIG_HEADERS([config.h])
 
 AC_PROG_CC
 
+# Check for Check testing framework (optional for testing)
+AC_ARG_ENABLE([tests],
+    AS_HELP_STRING([--enable-tests], [Enable building tests with Check framework]),
+    [enable_tests=$enableval],
+    [enable_tests=no])
+
+if test "x$enable_tests" = "xyes"; then
+    PKG_CHECK_MODULES([CHECK], [check >= 0.9.4])
+fi
+
+AM_CONDITIONAL([ENABLE_TESTS], [test "x$enable_tests" = "xyes"])
+
 AC_CHECK_HEADERS([stdlib.h string.h])
 
 AC_TYPE_SIZE_T

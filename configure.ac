@@ -1,5 +1,5 @@
 AC_PREREQ([2.69])
-AC_INIT([jc], [1.0.0], [support@example.com])
+AC_INIT([jc], [1.0.0], [oxUnd])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 AC_CONFIG_SRCDIR([src/main.c])
 AC_CONFIG_HEADERS([config.h])
