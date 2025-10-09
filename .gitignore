@@ -27,6 +27,8 @@ src/jc
 # Test artifacts
 tests/test_jc
 test_*/
+*.log
+*.trs
 
 # Debug
 *.dSYM/
@@ -38,3 +40,4 @@ vgcore.*
 .idea/
 *.swp
 *~
+
