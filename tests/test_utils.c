@@ -190,7 +190,7 @@ START_TEST(test_regex_replace_capture_groups) {
 
     // Test multiple capture groups and occurrences
     input = "John Doe (42) and Jane Smith (35)";
-    pattern = "(\\w+) (\\w+) \\((\\d+)\\)";
+    pattern = "([a-zA-Z]+) ([a-zA-Z]+) \\(([0-9]+)\\)";
     replacement = "$2, $1: $3 years old";
 
     result = regex_replace(input, pattern, replacement);
@@ -202,7 +202,7 @@ START_TEST(test_regex_replace_capture_groups) {
 
     // Test mixed capture groups and literal text
     input = "Item: 123, Quantity: 456";
-    pattern = "Item: (\\d+), Quantity: (\\d+)";
+    pattern = "Item: ([0-9]+), Quantity: ([0-9]+)";
     replacement = "Order - Item #$1, Count: $2 units";
 
     result = regex_replace(input, pattern, replacement);

@@ -201,6 +201,20 @@ char *regex_replace(const char *input, const char *pattern, const char *replacem
         return NULL;
     }
 
+    if (strlen(input) == 0) {
+        char *output = (char *)malloc(1);
+        output[0] = '\0';
+        return output;
+    }
+
+    if (strlen(pattern) == 0) {
+        int len = strlen(input) + 1;
+        char *output = (char *)malloc(len);
+        strncpy(output, input, len);
+
+        return output;
+    }
+
     regex_t regex;
     int ret;
 
