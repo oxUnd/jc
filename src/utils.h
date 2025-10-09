@@ -6,6 +6,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <regex.h>
 
 // Utility function prototypes
 int create_directory(const char *path);
@@ -19,5 +20,6 @@ int execute_command_quiet(const char *cmd);
 char *get_template_path(const char *template_name);
 int is_automake_project(void);
 int find_executable(const char *dir, char *output, size_t output_size);
+char *regex_replace(const char *input, const char *pattern, const char *replacement);
 
 #endif // UTILS_H
